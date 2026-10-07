@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Criar conta - NOVA SHOP</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  body { background:#020a26; margin:0; font-family: Arial, sans-serif; }
+  input::placeholder { color:#666; }
+  input:focus { border-color:#2b90ff !important; box-shadow:0 0 10px rgba(43,144,255,0.3); }
+</style>
+</head>
+<body>
+<header style="background:#0a0f2c; color:white; padding:12px 15px; display:flex; justify-content:space-between; align-items:center; flex-wrap:nowrap; gap:10px;">
+  <h1 style="margin:0; font-family:'Orbitron'; font-size:20px; white-space:nowrap;">NOVA SHOP</h1>
+  <nav style="display:flex; gap:12px; align-items:center; flex-wrap:nowrap; white-space:nowrap;">
+    <a href="index.html" style="color:white; text-decoration:none; white-space:nowrap;">Início</a>
+    <span id="area-login" style="display:flex; gap:12px; align-items:center; flex-wrap:nowrap; white-space:nowrap;"></span>
+  </nav>
+</header>
+
+<div style="min-height:85vh; display:flex; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:#111; padding:30px; border-radius:20px; border:1px solid #1e2a5a; box-shadow:0 0 25px rgba(43,144,255,0.2); max-width:400px; width:100%; text-align:center;">
+    <h2 style="color:white; font-family:'Orbitron'; font-size:26px; margin:0 0 25px 0;">Criar conta</h2>
+    
+    <input id="nome" type="text" placeholder="Seu nome" style="width:100%; background:#0a0f2c; border:1px solid #1e2a5a; color:white; padding:16px; border-radius:12px; margin-bottom:14px; font-size:16px; outline:none; box-sizing:border-box;">
+    <input id="email" type="email" placeholder="Seu e-mail" style="width:100%; background:#0a0f2c; border:1px solid #1e2a5a; color:white; padding:16px; border-radius:12px; margin-bottom:14px; font-size:16px; outline:none; box-sizing:border-box;">
+    <input id="senha" type="password" placeholder="Sua senha" style="width:100%; background:#0a0f2c; border:1px solid #1e2a5a; color:white; padding:16px; border-radius:12px; margin-bottom:10px; font-size:16px; outline:none; box-sizing:border-box;">
+    
+    <p id="msg-auth" style="min-height:20px; font-size:14px; margin:5px 0 15px 0; font-weight:bold;"></p>
+    
+    <button onclick="cadastrar()" style="width:100%; background:#2b90ff; color:white; padding:16px; border:none; border-radius:12px; font-weight:900; font-size:18px; cursor:pointer;">Cadastrar</button>
+    
+    <p style="color:#aaa; margin-top:16px; font-size:14px;">Já tem conta? <a href="login.html" style="color:#2b90ff; text-decoration:none; font-weight:bold;">Entrar</a></p>
+  </div>
+</div>
+
+<script src="js/produtos.js"></script>
+<script src="js/carrinho.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

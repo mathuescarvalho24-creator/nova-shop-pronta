@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA SHOP</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
+<style>
+  #area-login { display:flex; gap:15px; align-items:center; flex-wrap:nowrap; white-space:nowrap; }
+  #area-login a { white-space:nowrap; }
+</style>
+</head>
+<body>
+  <!-- FAIXA CUPONS -->
+  <div style="background:#ffcc00; color:#0a0f2c; text-align:center; padding:12px; font-weight:900; font-size:14px; font-family: Arial, sans-serif;">
+    🎉 USE O CUPOM <span style="background:#0a0f2c; color:#ffcc00; padding:2px 5px; border-radius:88px;">GAMER40</span> COM 40% OFF OU <span style="background:#0a0f2c; color:#ffcc00; padding: 2px 5px; border-radius:88px;">NOVA10</span> COM 10% OFF EM TODO O SITE! 🔥
+  </div>
+<header style="background:#0a0f2c; color:white; padding:15px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:nowrap; gap:10px;">
+  <h1 style="margin:0; white-space:nowrap;">NOVA SHOP</h1>
+  <nav style="display:flex; gap:15px; align-items:center; flex-wrap:nowrap; white-space:nowrap;">
+    <a href="index.html" style="color:white; text-decoration:none; white-space:nowrap;">Início</a>
+    <a href="index.html#produtos" style="color:white; text-decoration:none; white-space:nowrap;">Produtos</a>
+    <span id="area-login"></span>
+  </nav>
+</header>
+<section class="hero" style="background:#020a26 !important; background-image:none !important; padding:80px 20px; text-align:center; color:white;">
+  <h1 style="font-size: clamp(26px, 6vw, 48px); line-height:1.05; font-weight:900; margin:0 auto 14px; max-width:750px; color:white;">Você acabou de achar sua nova loja favorita de tech!</h1>
+  <p style="font-size: clamp(14px, 2.8vw, 18px); line-height:1.6; color:#cbd5e0; max-width:620px; margin:0 auto 30px;">A NOVA SHOP é simples: a gente garimpa os produtos gamers e tech que realmente valem a pena, traz com preço justo e te entrega rápido em qualquer canto do Brasil. Sem firula. Só tech boa que a gente usaria também.</p>
+  <a href="#produtos" style="display:inline-block; background:#00a8ff; color:white; padding:12px 28px; border-radius:8px; text-decoration:none; font-weight:700;">Ver produtos</a>
+</section>
+<section id="produtos" style="padding:40px 20px; background:#020a26;">
+<h2 style="color: white !important;">Produtos em destaque</h2>
+<div style="max-width:1200px; margin:0 auto 20px; display:flex; gap:10px;">
+  <input id="busca" type="text" placeholder="🔍 Buscar fone, tenis..." style="flex:1; padding:10px 15px; border-radius:8px; border:1px solid #ccc;">
+  <select id="filtro-preco" style="padding:10px; border-radius:8px; border:1px solid #ccc;">
+    <option value="">Todos preços</option>
+    <option value="0-100">Até R$100</option>
+    <option value="100-200">R$100 a R$200</option>
+    <option value="200-9999">Acima R$200</option>
+  </select>
+</div>
+
+<div id="grid-produtos" class="grid-produtos" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:20px; max-width:1200px; margin:0 auto;"></div>
+</section>
+
+<script src="js/produtos.js"></script>
+<script src="js/carrinho.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

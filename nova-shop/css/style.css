@@ -1,0 +1,437 @@
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
+body { background:#f5f6f8; color:#222; }
+header { background:#2b90ff; color:white; padding:18px 5%; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:10; }
+header h1 { font-size:22px; letter-spacing:1px; }
+header nav { display:flex; gap:18px; }
+header nav a { color:white; text-decoration:none; font-weight:600; font-size:14px; }
+.container { max-width:1200px; margin:0 auto; padding:0 5%; }
+.hero { background:#0a1931; color:white; text-align:center; padding:80px 5% 50px; }
+.hero h2 { font-size:32px; margin-bottom:10px; }
+.hero p { color:#cbd5e0; }
+.grid-produtos { display:grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap:20px; padding:20px 5% 60px; }
+.card-produto { background:white; border-radius:14px; padding:16px; border:1px solid #e9e9e9; display:flex; flex-direction:column; transition:0.2s; }
+.card-produto:hover { transform:translateY(-4px); box-shadow:0 10px 20px rgba(0,0,0,0.08); }
+.card-produto img { width:100%; height:180px; object-fit:contain; margin-bottom:12px; }
+.card-produto h3 { font-size:15px; margin-bottom:8px; height:38px; overflow:hidden; }
+.card-produto .preco { font-weight:800; color:#111; margin-bottom:12px; font-size:16px; }
+.btn-add { background:#111; color:white; border:none; padding:11px; border-radius:8px; font-weight:600; cursor:pointer; margin-top:auto; }
+.btn-add:hover { background:#2b90ff; }
+#carrinho-page { max-width:800px; margin:30px auto; background:white; border-radius:14px; padding:20px; }
+.item-carrinho { display:flex; gap:14px; align-items:center; padding:16px 0; border-bottom:1px solid #eee; }
+.item-carrinho img { width:70px; height:70px; object-fit:contain; background:#f7f7f7; border-radius:8px; padding:5px; }
+.item-carrinho .info { flex:1; }
+.item-carrinho .info b { font-size:14px; }
+.btn-x { background:#f1f1f1; border:none; width:32px; height:32px; border-radius:50%; cursor:pointer; }
+.total-box { background:#0f172a; color:white; padding:20px; border-radius:14px; margin-top:20px; }
+.total-box h3 { text-align:right; margin-bottom:12px; }
+footer { text-align:center; padding:40px; color:#999; font-size:12px; margin-top:40px; border-top:1px solid #eee; }
+@media (max-width: 600px) { header { flex-direction:column; gap:10px; } .hero h2 { font-size:26px; } .grid-produtos { grid-template-columns: 1fr 1fr; gap:12px; padding:10px 3%; } .card-produto img { height:130px; } }
+/* =========================
+   CHATBOT NOVA SHOP
+   ========================= */
+
+#chatbot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+#chatbot-botao {
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  background: #2b90ff;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+#chatbot-botao:hover {
+  transform: scale(1.05);
+}
+
+#chatbot-janela {
+  display: none;
+  position: absolute;
+  bottom: 75px;
+  right: 0;
+  width: 330px;
+  height: 450px;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+}
+
+#chatbot-cabecalho {
+  background: #2b90ff;
+  color: white;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#chatbot-fechar {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#chatbot-mensagens {
+  height: 340px;
+  padding: 15px;
+  overflow-y: auto;
+  background: #f5f6f8;
+}
+
+.mensagem {
+  max-width: 80%;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.mensagem.bot {
+  background: white;
+  color: #222;
+  border: 1px solid #e5e5e5;
+}
+
+.mensagem.usuario {
+  background: #2b90ff;
+  color: white;
+  margin-left: auto;
+}
+
+#chatbot-area {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  background: white;
+  border-top: 1px solid #ddd;
+}
+
+#chatbot-input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  outline: none;
+}
+
+#chatbot-input:focus {
+  border-color: #2b90ff;
+}
+
+#chatbot-enviar {
+  background: #111;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+#chatbot-enviar:hover {
+  background: #2b90ff;
+}
+
+@media (max-width: 600px) {
+  #chatbot {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  #chatbot-janela {
+    width: calc(100vw - 24px);
+    right: 0;
+  }
+}/* TESTE CHATBOT NOVA SHOP */
+
+#chatbot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99999;
+}
+
+#chatbot-botao {
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  background: #2b90ff;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}/* === CHATBOT NOVA SHOP - CORRIGIDO === */
+#chatbot-botao {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #2b90ff;
+  color: white;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  z-index: 9999;
+}
+
+#chatbot-janela {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 350px;
+  height: 450px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+#chatbot-cabecalho {
+  background: #2b90ff;
+  color: white;
+  padding: 12px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+#chatbot-fechar {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+#chatbot-mensagens {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f5f7fb;
+}
+
+.mensagem {
+  padding: 8px 12px;
+  border-radius: 12px;
+  max-width: 80%;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.mensagem.bot {
+  background: #e9e9;
+  color: #222;
+  align-self: flex-start;
+}
+
+.mensagem.usuario {
+  background: #2b90ff;
+  color: white;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+#chatbot-area {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background: white;
+  gap: 8px;
+}
+
+#chatbot-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+}
+
+#chatbot-enviar {
+  background: #2b90ff;
+  color: white;
+  border: none;
+  padding: 0 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}/* ===== NOVA SHOP - FUNDO CHAMATIVO + TIPOGRAFIA ===== */
+
+/* tira o fundo inline antigo e deixa animado */
+header {
+  background: #0a0f2c !important;
+}
+.hero, section:first-of-type {
+  background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #00d2ff) !important;
+  background-size: 400% 400% !important;
+  animation: gradientGamer 10s ease infinite;
+}
+
+@keyframes gradientGamer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Logo com neon */
+header h1 {
+  font-family: 'Orbitron', sans-serif !important;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #00d2ff;
+}
+
+/* Titulo Bem-vindo */
+.hero h1, .hero h2 {
+  font-family: 'Orbitron', sans-serif !important;
+  font-weight: 900 !important;
+}
+
+/* Responsivo - natural no celular */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hero h1, .hero h2 {
+    font-size: 1.8rem !important;
+  }
+}/* FUNDO AZUL MARINHO FORTE ATRÁS DOS PRODUTOS */
+body{
+  background-color: #050a1f !important;
+}
+main, section, .produtos, #produtos, .container-produtos {
+  background-color: #050a1f !important;
+}
+.produto, .card-produto {
+  background: white !important; /* card continua branco */
+}/* FORÇAR MOBILE GRANDE - NOVA SHOP */
+@media screen and (max-width: 768px) {
+  
+  /* TELA DE LOGIN E CADASTRO - DEIXA GIGANTE */
+  body {
+    background: #0a0f2c !important;
+  }
+  
+  /* O quadrado branco do login */
+  form, 
+  div:has(> form),
+  main > div {
+    width: 92% !important;
+    max-width: 92% !important;
+    margin: 20px auto !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  form input {
+    width: 100% !important;
+    font-size: 18px !important;
+    padding: 18px 15px !important;
+    margin-bottom: 15px !important;
+    border-radius: 10px !important;
+  }
+
+  form button {
+    width: 100% !important;
+    font-size: 19px !important;
+    padding: 18px !important;
+    font-weight: bold !important;
+  }
+
+  /* TODOS OS PRODUTOS - 1 POR LINHA GRANDÃO */
+  #lista-produtos,
+  .produtos,
+  section > div:last-child {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+    padding: 12px !important;
+  }
+
+  /* Se ainda ficar pequeno, muda pra 1 coluna só - descomenta a linha abaixo */
+  /* grid-template-columns: 1fr !important; */
+
+  /* Card do produto */
+  #lista-produtos > div,
+  .produto-card {
+    padding: 12px !important;
+  }
+
+  #lista-produtos img,
+  .produto-card img {
+    height: 160px !important;
+    object-fit: contain !important;
+  }
+
+  #lista-produtos p,
+  .produto-card p {
+    font-size: 18px !important;
+    font-weight: bold !important;
+    margin: 8px 0 !important;
+  }
+
+  #lista-produtos button {
+    font-size: 14px !important;
+    padding: 12px 5px !important;
+  }
+}
+
+/* Celular bem pequeno - 1 produto por linha gigante */
+@media screen and (max-width: 480px) {
+  #lista-produtos,
+  .produtos {
+    grid-template-columns: 1fr !important;
+  }
+  #lista-produtos img {
+    height: 220px !important;
+  }
+}/* FORÇA TUDO GIGANTE NO CELULAR */
+@media (max-width:768px){
+  html { font-size:22px !important; }
+  body { zoom: 1.1; }
+}/* DIMINUIR BOTÃO VER DETALHES - PRODUTOS EM DESTAQUE */
+#lista-destaque button, 
+#produtos-destaque button,
+.produtos-em-destaque button {
+  font-size: 14px !important;
+  padding: 10px 12px !important;
+  line-height: 1.2 !important;
+}/* AUMENTAR TODOS OS PRODUTOS - IMAGEM E VALOR */
+#lista-produtos .card img,
+#lista-produtos div img,
+#todos-produtos img {
+  height: 220px !important;
+  object-fit: contain !important;
+  padding: 15px !important;
+}
+#lista-produtos .preco,
+#lista-produtos div p:nth-child(3),
+#lista-produtos span.preco {
+  font-size: 22px !important;
+  font-weight: 900 !important;
+}

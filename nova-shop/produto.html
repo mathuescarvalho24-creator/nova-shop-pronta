@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produto - NOVA SHOP</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+/* --- PRODUTO DE CIMA COBRINDO A TELA --- */
+.container {
+  min-height: 90vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 20px !important;
+}
+#detalhe-produto {
+  width: 100% !important;
+}
+#detalhe-produto img {
+  height: 440px !important;
+  width: 100% !important;
+  max-width: 440px !important;
+  object-fit: contain !important;
+}
+#detalhe-produto h1 {
+  font-size: 32px !important;
+}
+#detalhe-produto h2 {
+  font-size: 36px !important;
+}
+#detalhe-produto p {
+  font-size: 20px !important;
+}
+#detalhe-produto button {
+  font-size: 24px !important;
+  padding: 22px 30px !important;
+  font-weight: 900 !important;
+  border-radius: 14px !important;
+  width: 100% !important;
+}
+
+/* --- TODOS OS PRODUTOS IGUAL A FOTO 1 - IMAGEM COLADA NO VALOR --- */
+#lista-produtos {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 14px !important;
+  padding: 14px !important;
+}
+#lista-produtos > div {
+  padding: 15px !important;
+  border-radius: 20px !important;
+  background: white !important;
+  text-align: center !important;
+}
+#lista-produtos img {
+  height: 160px !important;
+  width: 100% !important;
+  object-fit: contain !important;
+  padding: 10px !important;
+  margin-bottom: 0px !important;
+  background: white !important;
+  border-radius: 8px !important;
+}
+#lista-produtos h3 {
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  color: black !important;
+  margin: 10px 0 4px 0 !important;
+  line-height: 1.2 !important;
+}
+#lista-produtos span {
+  font-size: 22px !important;
+  font-weight: 900 !important;
+  color: #00a8ff !important;
+  margin: 4px 0 8px 0 !important;
+  display: block !important;
+}
+#lista-produtos button {
+  font-size: 16px !important;
+  font-weight: bold !important;
+  padding: 14px !important;
+  border-radius: 12px !important;
+  width: 100% !important;
+}
+
+@media (max-width: 480px){
+  #lista-produtos { grid-template-columns: 1fr 1fr !important; }
+  #lista-produtos img { height: 150px !important; }
+  #detalhe-produto img { height: 360px !important; }
+  .container { min-height: 88vh !important; }
+}
+</style>
+</head>
+<body>
+  <header style="background:#020a26; padding:15px 20px; display:flex; justify-content:space-between; align-items:center;">
+    <h1 style="color:white; font-family:'Orbitron'; margin:0; font-size:20px; white-space:nowrap;">NOVA SHOP</h1>
+    <nav style="display:flex; gap:15px; align-items:center;">
+      <a href="index.html" style="color:white; text-decoration:none; font-size:16px; white-space:nowrap;">Inicio</a>
+      <a href="carrinho.html" style="color:white; text-decoration:none; font-size:16px; white-space:nowrap;">Carrinho (<span id="contador-carrinho">0</span>)</a>
+    </nav>
+  </header>
+
+  <div class="container" style="padding:30px;">
+    <div id="detalhe-produto"></div>
+  </div>
+
+  <div style="background:#0a0f2c; padding:30px 20px 50px 20px;">
+    <h2 style="color:white; font-family:'Orbitron'; margin:0 0 20px 0; font-size:22px;">🔥 Todos os Produtos</h2>
+    <div class="grid produtos" id="lista-produtos" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:15px;"></div>
+  </div>
+
+  <footer style="text-align:center; padding:30px; color:#fff; font-size:16px; background:#020a26;">© 2026 NOVA SHOP</footer>
+
+  <script src="js/produtos.js"></script>
+  <script src="js/carrinho.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get('id'));
+    const produto = produtos.find(p => p.id === id);
+
+    const divDetalhe = document.getElementById('detalhe-produto');
+    if(produto){
+      divDetalhe.innerHTML = `
+        <div style="display:flex; gap:30px; flex-wrap:wrap; background:#111; padding:30px; border-radius:20px; color:white; align-items:center; max-width:1000px; margin:0 auto; width:100%;">
+          <img src="${produto.imagem || produto.img}" style="width:100%; max-width:420px; height:420px; object-fit:contain; background:white; border-radius:16px; padding:20px;">
+          <div style="flex:1; min-width:280px;">
+            <h1 style="font-family:'Orbitron'; font-size:32px;">${produto.nome}</h1>
+            <h2 style="color:#2b90ff; font-size:36px;">R$ ${produto.preco.toFixed(2)}</h2>
+            <p style="opacity:0.9; margin:20px 0; font-size:18px; line-height:1.4;">${produto.descricao || 'Fone com cancelamento de ruído ativo, graves potentes e bateria de até 40h. Almofada macia pra usar o dia todo no game, treino ou trabalho sem cansar o ouvido.'}</p>
+            <button onclick="adicionarAoCarrinho(${produto.id})" style="background:#2b90ff; color:white; padding:22px 30px; border:none; border-radius:14px; font-weight:900; font-size:24px; cursor:pointer; width:100%;">Adicionar ao carrinho</button>
+            <br><br>
+            <a href="index.html" style="color:#aaa; text-decoration:none; font-size:16px;">← Voltar</a>
+          </div>
+        </div>
+      `;
+    }
+
+    const lista = document.getElementById('lista-produtos');
+    if(lista){
+      lista.innerHTML = produtos.filter(p => p.id !== id && !p.nome.toLowerCase().includes('tenis') && !p.nome.toLowerCase().includes('tênis')).map(p => `
+        <div class="card produto" style="background:white; padding:15px; border-radius:20px; text-align:center;">
+          <img src="${p.imagem || p.img}" style="width:100%; height:160px; object-fit:contain; background:white; border-radius:8px;">
+          <h3 style="color:black; font-size:16px; margin:12px 0 6px 0; font-weight:800; line-height:1.2;">${p.nome}</h3>
+          <span style="font-weight:900; color:#00a8ff; font-size:22px; display:block; margin:6px 0 10px 0;">R$ ${p.preco.toFixed(2)}</span>
+          <button onclick="adicionarAoCarrinho(${p.id})" style="background:#020a26; color:white; border:none; padding:14px; border-radius:12px; cursor:pointer; width:100%; font-size:16px; font-weight:bold;">Adicionar ao carrinho</button>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

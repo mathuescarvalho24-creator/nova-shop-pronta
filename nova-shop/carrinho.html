@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrinho - NOVA SHOP</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+body{
+  background-image: url('imagens/fundo-gamer-escuro.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #0a0f2c;
+  margin:0;
+  font-family: Arial, sans-serif;
+}
+.container{
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(3px);
+  border-radius: 20px;
+  padding: 25px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+#lista-carrinho{
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+}
+.cupom-area{
+  background:white;
+  border-radius:12px;
+  padding:15px;
+  margin-top:15px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.cupom-area input{
+  flex:1;
+  padding:12px;
+  border-radius:8px;
+  border:2px solid #ddd;
+  outline:none;
+}
+.cupom-area input:focus{ border-color:#2b90ff; }
+</style>
+</head>
+<body>
+  <script>
+  const usuario = localStorage.getItem('usuario') || localStorage.getItem('usuarioLogado');
+  if(!usuario){
+    alert('Você precisa fazer login para acessar o carrinho!');
+    window.location.href = 'login.html';
+  }
+</script>
+<header style="background:#2b90ff; padding:15px; color:white; display:flex; justify-content:space-between; align-items:center;">
+  <h1>NOVA SHOP</h1>
+  <nav style="display:flex; gap:15px;">
+    <a href="index.html" style="color:white; text-decoration:none;">Inicio</a>
+    <a href="produto.html" style="color:white; text-decoration:none;">Produtos</a>
+    <a href="carrinho.html" style="color:white; text-decoration:none; font-weight:bold;">Carrinho (<span id="contador-carrinho">0</span>)</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>🛒 Seu Carrinho</h2>
+  <div id="lista-carrinho"></div>
+
+  <!-- AREA DO CUPOM -->
+  <div class="cupom-area">
+    <input id="input-cupom" placeholder="Cupom: NOVA10 ou GAMER40" />
+    <button onclick="aplicarCupom()" style="background:#2b90ff; color:white; border:none; padding:12px 18px; border-radius:8px; font-weight:bold; cursor:pointer;">Aplicar</button>
+  </div>
+  <p id="msg-cupom" style="margin:8px 5px; font-size:13px; font-weight:bold; min-height:18px;"></p>
+
+  <h3 id="total" style="text-align:right; margin-top:20px; color:#2b90ff;"></h3>
+
+  <div style="text-align:right;">
+    <button onclick="limparCarrinho()" style="margin-top:20px; background:#ff4444; color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer;">Limpar Carrinho</button>
+    <button onclick="finalizarCompra()" style="margin-top:20px; margin-left:10px; background:#2b90ff; color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer;">Finalizar Compra</button>
+  </div>
+</div>
+
+<footer style="text-align:center; padding:40px; color:#fff; font-size:11px;">© 2026 NOVA SHOP</footer>
+
+<script src="js/produtos.js"></script>
+<script src="js/carrinho.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>
